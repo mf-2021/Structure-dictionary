@@ -45,7 +45,7 @@ https://docs.google.com/spreadsheets/d/1m7GAMQa9RGJO0XN7lldLNqafo8fT61z1ie4SFORr
     - （現在作成中）
     
 ## チャレンジ要素一覧
-<https://docs.google.com/spreadsheets/d/1UgK-6l38k5T81XjcTIn7CHnGRkB_sBXS5xQWAVhWmks/edit#gid=0>
+https://docs.google.com/spreadsheets/d/1aoN0TTmRfTs8Wly5KmI-ZaC2bQsS7uCYEVLtazCnL4c/edit?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)
