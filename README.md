@@ -36,13 +36,16 @@ https://docs.google.com/spreadsheets/d/1apngUXkrOHc0mNCPAKZW3BrFN2U_T6y73ttc2Ik8
     - 執筆者側
     https://drive.google.com/file/d/1iLPzm4PPI09KBL7bRznDoJkM3Y5PdzYH/view?usp=sharing
 - ワイヤーフレーム
-    - 別途手描きにて作成
+    - 管理者側
+    https://drive.google.com/file/d/1AtjWMP0MezigYUI2VnpSa0QuuGa30NxM/view?usp=sharing
+    - 執筆者側
+    https://drive.google.com/file/d/18D54QbtH7zG7FYljkeFyfGSBDKjVQkmn/view?usp=sharing
 - ER図
 https://drive.google.com/file/d/1sGhehBpzp_O2xPi3bbSYLuusOU8_tVTH/view?usp=sharing
 - テーブル定義書
 https://docs.google.com/spreadsheets/d/1m7GAMQa9RGJO0XN7lldLNqafo8fT61z1ie4SFORrRp0/edit?usp=sharing
 - アプリケーション詳細設計書
-    - （現在作成中）
+    - https://drive.google.com/file/d/14YF0Bq-dgmiwxWAzg1q0qmzyTKNFfZ_E/view?usp=sharing
     
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1aoN0TTmRfTs8Wly5KmI-ZaC2bQsS7uCYEVLtazCnL4c/edit?usp=sharing
