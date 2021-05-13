@@ -63,3 +63,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # divise
 gem 'devise'
+
+# MySQL（本番環境用）
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
