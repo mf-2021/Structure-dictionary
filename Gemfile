@@ -69,3 +69,9 @@ gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
 end
+
+gem 'bootstrap', '~>4.5'
+gem 'jquery-rails'
+gem 'font-awesome-sass', '~>5.13'
+
+gem 'coffee-script-source', '1.8.0'
