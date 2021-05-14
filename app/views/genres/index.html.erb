@@ -1,0 +1,18 @@
+<h1>ジャンル一覧</h1>
+<table class="table table-striped">
+  <tr>
+    <th>No.</th>
+    <th>ジャンル名</th>
+  </tr>
+  <% @genres.each do |genre| %>
+  <tr>
+    <td><%= genre.id %></td>
+    <td><%= genre.name %></td>
+    <td><%= link_to "編集", edit_genre_path(genre) %></td>
+  </tr>
+  <% end %>
+</table>
+<%= form_with model:@new_genre, url:genres_path, local:true do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit '登録' %>
+<% end %>
