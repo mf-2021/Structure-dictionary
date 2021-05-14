@@ -60,3 +60,18 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# divise
+gem 'devise'
+
+# MySQL（本番環境用）
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
+
+gem 'bootstrap', '~>4.5'
+gem 'jquery-rails'
+gem 'font-awesome-sass', '~>5.13'
+
+gem 'coffee-script-source', '1.8.0'
