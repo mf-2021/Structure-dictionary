@@ -11,9 +11,10 @@
 // about supported directives.
 //
 
-//= require jquery3
-//= require popper
-//= require bootstrap-sprockets
+// bootstrap導入時のエラーのためコメントアウト
+// require jquery3
+// require popper
+// require bootstrap-sprockets
 
 //= require rails-ujs
 //= require activestorage
