@@ -32,6 +32,18 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
+      ## ニックネームを追加
+      t.string :name
+
+      ## アイコン用画像を追加
+      t.string :image_id
+
+      ## 生年を追加
+      t.date :birth
+
+      ## 執筆者ステータスを追加
+      t.boolean :is_deleted, default :false, null :false
+
 
       t.timestamps null: false
     end
