@@ -1,4 +1,4 @@
-class GenresController < ApplicationController
+class Admin::GenresController < ApplicationController
   def index
     # ジャンル一覧を表示するインスタンス
     @genres = Genre.all
