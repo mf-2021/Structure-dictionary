@@ -33,16 +33,16 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       # t.datetime :locked_at
 
       ## ニックネームを追加
-      t.string :name
+      t.string :name, null: false
 
       ## アイコン用画像を追加
       t.string :image_id
 
       ## 生年を追加
-      t.date :birth
+      t.date :birth, null: false
 
       ## 執筆者ステータスを追加
-      t.boolean :is_deleted, default :false, null :false
+      t.boolean :is_deleted, default: false, null: false
 
 
       t.timestamps null: false

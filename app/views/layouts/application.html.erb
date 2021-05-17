@@ -10,23 +10,29 @@
   </head>
 
   <body>
+    <!--管理者としてログインした場合のヘッダー-->
     <% if admin_signed_in? %>
-      <li>
-        <%=link_to "執筆者一覧" %>
-      </li>
-      <li>
-        <%=link_to "ジャンル一覧" %>
-      </li>
-      <li>
-        <%=link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-      </li>
+      <li><%=link_to "執筆者一覧" %></li>
+      <li><%=link_to "ジャンル一覧" %></li>
+      <li><%=link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+    <!--会員としてログインした場合のヘッダー-->
+    <% elsif user_signed_in? %>
+      <li>ようこそ、<%= current_user.name %>さん！</li>
+      <li><%=link_to "About", about_path %></li>
+      <li><%=link_to "設計者一覧" %></li>
+      <li><%=link_to "所在地一覧" %></li>
+      <li><%=link_to "執筆者一覧", writers_path %></li>
+      <li><%=link_to "執筆" %></li>
+      <li><%=link_to "マイページ", writer_path(current_user.id) %></li>
+      <li><%=link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
     <% else %>
-      <li>
-        <%= link_to "新規登録", new_admin_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_admin_session_path %>
-      </li>
+      <li><%=link_to "About", about_path %></li>
+      <li><%=link_to "設計者一覧" %></li>
+      <li><%=link_to "所在地一覧" %></li>
+      <li><%=link_to "執筆者一覧", writers_path %></li>
+      <li><%=link_to "執筆" %></li>
+      <li><%=link_to "新規登録", new_user_registration_path %></li>
+      <li><%=link_to "ログイン", new_user_session_path %></li>
     <% end %>
 
     <%= yield %>

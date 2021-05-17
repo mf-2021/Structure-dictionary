@@ -9,8 +9,17 @@ Rails.application.routes.draw do
   # ユーザー側
   scope module: :public do
     devise_for :users
-    get '/' => "homes#top"
-    get '/about' => "homes#about"
+    get "/" => "homes#top"
+    get "/about" => "homes#about"
+    resources :writers, only: [:index, :show, :edit, :update] do
+      collection do
+        get :unsubscribe
+        patch :withdraw
+        # get "/writers" => "writers#index"
+        # get "/writers/unsubscribe" => "writers#unsubscribe"
+        # patch "/writers/withdraw" => "writers#withdraw"
+      end
+    end
   end
 
 end
