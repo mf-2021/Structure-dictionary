@@ -1,0 +1,37 @@
+<h1>新規執筆</h1>
+<%= form_with model:@writing, url:writings_path, local:true do |f| %>
+  <%= f.label :設計者名 %>
+  <%= f.fields_for :designer, @writing.designers.build do |designer| %>
+    <%= f.text_field :last_name %>
+    <%= f.text_field :first_name %>
+  <% end %>
+
+  <%= f.label :建築・土木構造物名 %>
+  <%= f.text_field :name %>
+
+  <%= f.label :ジャンル %>
+  <%= collection_select(:genre, :name, @genres, :id, :name) %>
+
+  <%= f.label :郵便番号 %>
+  <%= f.text_field :postal_code %>
+
+  <%= f.label :都道府県 %>
+  <%= f.text_field :prefecture %>
+
+  <%= f.label :市区町村 %>
+  <%= f.text_field :city %>
+
+  <%= f.label :町丁番地 %>
+  <%= f.text_field :address %>
+
+  <%= f.label :写真 %>
+  <%= f.attachment_field :image %>
+
+  <%= f.label :説明文 %>
+  <%= f.text_field :introduction %>
+
+  <%= f.label :タグを付ける %>
+  <%= f.text_field :name %>
+
+  <%= f.submit '執筆完了' %>
+<% end %>

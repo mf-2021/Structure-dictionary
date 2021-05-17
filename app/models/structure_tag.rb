@@ -1,0 +1,2 @@
+class StructureTag < ApplicationRecord
+end

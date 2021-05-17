@@ -4,4 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   attachment :image
+
+  # アソシエーション
+  has_many :structure_users, dependent: :destroy
+
 end
