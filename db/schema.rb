@@ -68,7 +68,8 @@ ActiveRecord::Schema.define(version: 2021_05_17_101400) do
   end
 
   create_table "structures", force: :cascade do |t|
-    t.integer "writer_id"
+    t.integer "user_id"
+    t.integer "genre_id"
     t.string "name"
     t.string "postal_code"
     t.string "prefecture"

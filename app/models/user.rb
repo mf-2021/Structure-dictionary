@@ -5,7 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   attachment :image
 
-  # アソシエーション
+  # 構造物テーブルとのアソシエーション
   has_many :structure_users, dependent: :destroy
+  has_many :structures, through: :structure_users
 
 end
