@@ -1,0 +1,17 @@
+<h1>執筆履歴一覧</h1>
+<table class="table table-striped">
+  <tr>
+    <th>投稿日時</th>
+    <th>No.</th>
+    <th>執筆者名</th>
+    <th>建築・土木構造物名</th>
+  </tr>
+  <% @writings.each do |writing| %>
+  <tr>
+    <td><%= writing.created_at %></td>
+    <td><%= writing.id %></td>
+    <td><%= writing.structure_users.find_by(user_id: writing.user_id, structure_id: writing.id).user.name.inspect %></td>
+    <td><%= writing.name %></td>
+  </tr>
+  <% end %>
+</table>

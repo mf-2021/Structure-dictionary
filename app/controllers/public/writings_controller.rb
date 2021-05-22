@@ -4,10 +4,7 @@ class Public::WritingsController < ApplicationController
     @writing.designers.new
     @writing.photos.build
     @writing.introductions.build
-    # @writing.structure_tags.build
     @tag = Tag.new
-    # @tag = @writing.structure_tags.build
-    # @tag.tags.build
     @genres = Genre.all
   end
 
@@ -15,8 +12,8 @@ class Public::WritingsController < ApplicationController
     @writing = Structure.new(structure_params)
     @writing.user_id = current_user.id
     @writing.genre_id = params[:genre][:name].to_i
+    @writing.structure_users.new(user_id: current_user.id)
     @writing.save
-    # byebug
     @tag = Tag.new(name: params[:structure][:tags][:name])
     @tag.save
     @structure_tag =StructureTag.new(tag_id: @tag.id, structure_id: @writing.id)
@@ -25,9 +22,12 @@ class Public::WritingsController < ApplicationController
   end
 
   def index
+    @writings = Structure.all
+
   end
 
   def show
+    @writing = Structure.find(params[:id])
   end
 
   def edit

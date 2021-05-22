@@ -1,0 +1,7 @@
+<h1><%= @writing.name %></h1>
+<h2>設計者：<%= @writing.designers.find_by(structure_id: @writing.id).last_name %></h2>
+<section><%= attachment_image_tag @writing.photos.find_by(structure_id: @writing.id), :image, size:"80x80", format:"jpeg", fallback: "no_image.jpg" %></section>
+<P><%= @writing.introductions.find_by(structure_id: @writing.id).introduction %></P>
+<p>執筆者：<%= @writing.structure_users.find_by(user_id: @writing.user_id, structure_id: @writing.id).user.name %></p>
+<p>郵便番号：<%= @writing.postal_code %></p>
+<p>所在地：<%= @writing.prefecture + @writing.city + @writing.address %></p>
