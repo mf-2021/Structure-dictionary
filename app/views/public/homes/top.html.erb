@@ -1,17 +1,9 @@
-<h1>トップページ3</h1>
-<div>
-  <h1>設計者から探す</h1>
-  <img src="https://picsum.photos/300/200">
-</div>
-<div>
-  <h1>所在地から探す</h1>
-  <img src="https://picsum.photos/300/200">
-</div>
-<div>
-  <h1>構造物から探す</h1>
-  <img src="https://picsum.photos/300/200">
-</div>
-<div>
-  <h1>タグから探す</h1>
-  <img src="https://picsum.photos/300/200">
+<h1>構造物一覧</h1>
+<div class="container d-flex">
+  <% @photos.each do |photo| %>
+  <div>
+    <section><%= attachment_image_tag photo, :image, size:"80x80", format:"jpeg", fallback: "no_image.jpg" %></section>
+    <h1><%= Structure.find_by(id: photo.structure_id).name %></h1>
+  </div>
+  <% end %>
 </div>

@@ -1,7 +1,7 @@
-<h1>新規執筆</h1>
-<%= form_with model:@writing, url:writings_path, local:true do |f| %>
+<h1>執筆編集</h1>
+<%= form_with model:@writing, url:writing_path(params[:id]), local:true do |f| %>
   <%= f.label :設計者名 %>
-  <%= f.fields_for :designers, @writing.designers.build do |d| %>
+  <%= f.fields_for :designers, @writing.designers do |d| %>
     <%= d.text_field :last_name %>
     <%= d.text_field :first_name %>
   <% end %>
@@ -24,12 +24,13 @@
   <%= f.label :町丁番地 %>
   <%= f.text_field :address %>
 
-  <%= f.fields_for :photos, @writing.photos.build do |ph| %>
+  <section><%= attachment_image_tag @writing.photos.find_by(structure_id: @writing.id), :image, size:"80x80", format:"jpeg", fallback: "no_image.jpg" %></section>
+  <%= f.fields_for :photos, @writing.photos do |ph| %>
     <%= ph.label :写真 %>
     <%= ph.attachment_field :image %>
   <% end %>
 
-  <%= f.fields_for :introductions, @writing.introductions.build do |i| %>
+  <%= f.fields_for :introductions, @writing.introductions do |i| %>
     <%= i.label :説明文 %>
     <%= i.text_field :introduction %>
   <% end %>

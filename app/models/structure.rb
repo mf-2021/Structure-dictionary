@@ -19,9 +19,15 @@ class Structure < ApplicationRecord
   # タグテーブルとのアソシエーション
   has_many :structure_tags, dependent: :destroy
   has_many :tags, through: :structure_tags
-  accepts_nested_attributes_for :structure_tags, allow_destroy: true
+  accepts_nested_attributes_for :structure_tags
 
   # ジャンルテーブルとのアソシエーション
   belongs_to :genre
+
+
+  # バリデーション
+  validates :name, presence: true
+
+
 
 end

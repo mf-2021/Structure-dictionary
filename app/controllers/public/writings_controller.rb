@@ -1,10 +1,10 @@
 class Public::WritingsController < ApplicationController
   def new
     @writing = Structure.new
-    @writing.designers.new
+    @writing.designers.build
     @writing.photos.build
     @writing.introductions.build
-    @tag = Tag.new
+    @tags = Tag.new
     @genres = Genre.all
   end
 
@@ -28,12 +28,24 @@ class Public::WritingsController < ApplicationController
 
   def show
     @writing = Structure.find(params[:id])
+    @add_writing = Structure.new
+    structure_tag = StructureTag.find_by(structure_id: @writing.id)
+    @tags = Tag.where(id: structure_tag.tag_id)
   end
 
   def edit
+    @writing = Structure.find(params[:id])
+    structure_tag = StructureTag.find_by(structure_id: @writing.id)
+    @tags = Tag.find_by(id: structure_tag.tag_id)
+    @genres = Genre.all
+    @add_writing = Structure.new
   end
 
   def update
+    @writing = Structure.find(params[:id])
+    @writing.update(structure_params)
+    @tag = Tag.update(name: params[:structure][:tags][:name])
+    redirect_to writing_path(params[:id])
   end
 
   def destroy
