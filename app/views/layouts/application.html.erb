@@ -12,32 +12,40 @@
   </head>
 
   <body>
-    <h1><%= link_to "Structure dictionary", "/" %></h1>
+    <nav class="navbar navbar-expand-xl navbar-dark bg-dark text-white">
+      <%= link_to "Structure dictionary", "/", class: "navbar-brand mb-0 display-1" %>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+        <!--管理者としてログインした場合のヘッダー-->
+        <% if admin_signed_in? %>
+          <li class="nav-item"><%=link_to "執筆者一覧" %></li>
+          <li class="nav-item"><%=link_to "ジャンル一覧" %></li>
+          <li class="nav-item"><%=link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
 
-    <!--管理者としてログインした場合のヘッダー-->
-    <% if admin_signed_in? %>
-      <li><%=link_to "執筆者一覧" %></li>
-      <li><%=link_to "ジャンル一覧" %></li>
-      <li><%=link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
-
-    <!--会員としてログインした場合のヘッダー-->
-    <% elsif user_signed_in? %>
-      <li>ようこそ、<%= current_user.name %>さん！</li>
-      <li><%=link_to "About", about_path %></li>
-      <!--<li><%#=link_to "設計者一覧" %></li>-->
-      <!--<li><%#=link_to "所在地一覧" %></li>-->
-      <!--<li><%#=link_to "執筆者一覧", writers_path %></li>-->
-      <li><%=link_to "執筆" , new_writing_path%></li>
-      <li><%=link_to "マイページ", writer_path(current_user.id) %></li>
-      <li><%=link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-    <% else %>
-      <li><%=link_to "About", about_path %></li>
-      <!--<li><%#=link_to "設計者一覧" %></li>-->
-      <!--<li><%#=link_to "所在地一覧" %></li>-->
-      <!--<li><%#=link_to "執筆者一覧", writers_path %></li>-->
-      <li><%=link_to "新規登録", new_user_registration_path %></li>
-      <li><%=link_to "ログイン", new_user_session_path %></li>
-    <% end %>
+        <!--会員としてログインした場合のヘッダー-->
+        <% elsif user_signed_in? %>
+          <li>ようこそ、<%= current_user.name %>さん！</li>
+          <li class="nav-item"><%=link_to "About", about_path, class: "nav-link" %></li>
+          <!--<li><%#=link_to "設計者一覧" %></li>-->
+          <!--<li><%#=link_to "所在地一覧" %></li>-->
+          <!--<li><%#=link_to "執筆者一覧", writers_path %></li>-->
+          <li class="nav-item"><%=link_to "執筆" , new_writing_path, class: "nav-link" %></li>
+          <li class="nav-item"><%=link_to "マイページ", writer_path(current_user.id), class: "nav-link" %></li>
+          <li class="nav-item"><%=link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+        <% else %>
+          <li class="nav-item"><%=link_to "About", about_path, class: "nav-link" %></li>
+          <!--<li><%#=link_to "設計者一覧" %></li>-->
+          <!--<li><%#=link_to "所在地一覧" %></li>-->
+          <!--<li><%#=link_to "執筆者一覧", writers_path %></li>-->
+          <li class="nav-item"><%=link_to "新規登録", new_user_registration_path, class: "nav-link" %></li>
+          <li class="nav-item"><%=link_to "ログイン", new_user_session_path, class: "nav-link" %></li>
+        </ul>
+      </div>
+      <% end %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
 
     <%= yield %>
   </body>

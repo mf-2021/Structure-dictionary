@@ -1,9 +1,15 @@
-<h1>構造物一覧</h1>
-<div class="container d-flex">
-  <% @photos.each do |photo| %>
-  <div>
-    <section><%= attachment_image_tag photo, :image, size:"80x80", format:"jpeg", fallback: "no_image.jpg" %></section>
-    <h1><%= Structure.find_by(id: photo.structure_id).name %></h1>
+<div class="container">
+  <h4 class="mt-3">構造物一覧</h4>
+  <div class="d-flex flex-wrap">
+    <% @photos.each do |photo| %>
+    <div class="my-2 mx-3">
+      <section>
+        <%= link_to writing_path(photo) do %>
+          <%= attachment_image_tag photo, :image, size:"200x200", format:"jpeg", fallback: "no_image.jpg" %>
+        <% end %>
+      </section>
+      <h6><%= Structure.find_by(id: photo.structure_id).name %></h6>
+    </div>
+    <% end %>
   </div>
-  <% end %>
 </div>
