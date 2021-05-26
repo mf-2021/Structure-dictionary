@@ -4,6 +4,9 @@ class Public::WritersController < ApplicationController
   end
 
   def show
+    # structures = Structure.all[0]
+    # byebug
+    @structures = Structure.where(user_id: current_user.id)
   end
 
   def edit

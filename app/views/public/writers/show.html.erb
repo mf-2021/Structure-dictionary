@@ -1,3 +1,10 @@
-<h1><%= link_to "#{current_user.name}さん", edit_writer_path(current_user.id) %>のマイページ</h1>
+<h4 class="mt-3"><%= link_to "#{current_user.name}さん", edit_writer_path(current_user.id) %>のマイページ</h4>
 <h4>執筆履歴（最近の執筆）</h4>
+  <% if @structures[0] %>
+    <%= @structures.each do |structure| %>
+      <%= structure.name %>
+    <% end %>
+  <% else %>
+    <%= @structures[0].inspect %>
+  <% end %>
 <p><%= link_to "退会する", unsubscribe_writers_path %></p>
