@@ -4,9 +4,11 @@ class Public::WritersController < ApplicationController
   end
 
   def show
-    # structures = Structure.all[0]
+    structures = Structure.where(user_id: current_user.id)
     # byebug
-    @structures = Structure.where(user_id: current_user.id)
+    @photos = Photo.where(structure_id: structures.ids)
+
+    # byebug
   end
 
   def edit
