@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  # Google mapのテスト用ルーティング
   get 'maps/index'
+
   # 管理者側
   scope module: :admin do
     devise_for :admins

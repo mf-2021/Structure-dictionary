@@ -1,17 +1,62 @@
 <div class="container">
-  <h4 class="border-bottom pb-1 mt-3 "><%= @writing.name %></h1>
+  <h4 class="border-bottom pb-1 mt-3 "><%= @structure.name %></h1>
   <div class="row">
-    <div class="col-lg-7"><%= attachment_image_tag @writing.photos.find_by(structure_id: @writing.id), :image, size:"500x500", format:"jpeg", fallback: "no_image.jpg" %></div>
+    <div class="col-lg-7"><%= attachment_image_tag @structure, :image, size:"500x500", format:"jpeg", fallback: "no_image.jpg" %></div>
     <div class="col-lg-5">
-      <h5 class="mt-2">設計者：<%= @writing.designers.find_by(structure_id: @writing.id).last_name + @writing.designers.find_by(structure_id: @writing.id).first_name %></h2>
-      <P class="mt-5"><%= @writing.introductions.find_by(structure_id: @writing.id).introduction %></P>
-      <p>執筆者：<%= @writing.structure_users.find_by(user_id: @writing.user_id, structure_id: @writing.id).user.name %></p>
-      <p>郵便番号：<%= @writing.postal_code %></p>
-      <p>所在地：<%= @writing.prefecture + @writing.city + @writing.address %></p>
-      <% @tags.each do |t| %>
-      <p>タグ：<%= t.name %></p>
-      <% end %>
-      <p><%= link_to "編集", edit_writing_path(@writing) %></p>
+      <h5 class="mt-2">設計者：<%= @structure.last_name + @structure.first_name %></h2>
+      <P class="mt-5"><%= @structure.introduction %></P>
+      <p>執筆者：<%= @structure.structure_users.find_by(user_id: @structure.user_id, structure_id: @structure.id).user.name %></p>
+      <p>郵便番号：<%= @structure.postal_code %></p>
+      <p>所在地：<%= @structure.prefecture + @structure.city + @structure.address %></p>
+      <%# @tags.each do |t| %>
+      <!--<p>タグ：<%#= t.name %></p>-->
+      <%# end %>
+      <p><%= link_to "編集", edit_writing_path(@structure) %></p>
     </div>
-  </div>
 </div>
+    <!--地図を表示-->
+    <div class="row">
+      <div class="col-lg-12">
+        <p><%= @structure.structure_address %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div id="map" style="width: 300px; height: 270px;"></div>
+      </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+        function initMap() {
+
+            var test ={lat: <%= @structure.latitude %>, lng: <%= @structure.longitude %>};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: test
+            });
+            console.log(map);
+            var transitLayer = new google.maps.TransitLayer();
+            transitLayer.setMap(map);
+
+            var contentString = '住所：<%= @structure.structure_address %>';
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            var marker = new google.maps.Marker({
+                position:test,
+                map: map,
+                title: contentString
+            });
+
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+            });
+        }
+    </script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=&callback=initMap">
+    </script>

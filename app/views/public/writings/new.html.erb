@@ -1,7 +1,7 @@
 <div class="container">
   <h4 class="mt-3 border-bottom">新規執筆</h4>
   <div class="form-group">
-    <%= form_with model:@writing, url:writings_path, local:true do |f| %>
+    <%= form_with model:@structure, url:writings_path, local:true do |f| %>
 
       <!--設計者氏名入力欄-->
       <div class="row mt-3">
@@ -10,14 +10,12 @@
         </div>
       </div>
       <div class="row">
-      <%= f.fields_for :designers, @writing.designers.build do |d| %>
         <div class="col">
-          <%= d.text_field :last_name, class:"form-control", placeholder:"例：隈" %>
+          <%= f.text_field :last_name, class:"form-control", placeholder:"例：隈" %>
         </div>
         <div class="col">
-          <%= d.text_field :first_name, class:"form-control", placeholder:"例：研吾" %>
+          <%= f.text_field :first_name, class:"form-control", placeholder:"例：研吾" %>
         </div>
-      <% end %>
       </div>
 
       <!--建築・土木構造物名入力欄-->
@@ -93,31 +91,27 @@
       </div>
 
       <!--写真アップロード欄-->
-      <%= f.fields_for :photos, @writing.photos.build do |ph| %>
       <div class="row mt-3">
         <div class="col">
-          <%= ph.label :写真 %>
+          <%= f.label :写真 %>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <%= ph.attachment_field :image %>
+          <%= f.attachment_field :image %>
         </div>
-      <% end %>
       </div>
 
       <!--説明文入力欄-->
-      <%= f.fields_for :introductions, @writing.introductions.build do |i| %>
       <div class="row mt-3">
         <div class="col">
-          <%= i.label :説明文 %>
+          <%= f.label :説明文 %>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <%= i.text_field :introduction, class:"form-control", placeholder:"例：東京オリンピック・パラリンピックの主会場です。" %>
+          <%= f.text_field :introduction, class:"form-control", placeholder:"例：東京オリンピック・パラリンピックの主会場です。" %>
         </div>
-      <% end %>
       </div>
 
       <!--タグ入力欄-->

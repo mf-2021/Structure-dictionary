@@ -1,6 +1,6 @@
 class Public::HomesController < ApplicationController
   def top
-    @photos = Photo.all
+    @structures = Structure.all
   end
 
   def about

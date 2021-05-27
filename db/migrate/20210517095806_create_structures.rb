@@ -9,6 +9,12 @@ class CreateStructures < ActiveRecord::Migration[5.2]
       t.string :city
       t.string :address
 
+      #5/27仕様変更：設計者テーブル、写真テーブル、説明文テーブルを集約
+      t.string :last_name
+      t.string :first_name
+      t.string :image_id
+      t.text :introduction
+
       t.timestamps
     end
   end
