@@ -1,4 +1,7 @@
 class Admin::GenresController < ApplicationController
+  # 管理者以外のアクセス制限
+  before_action :authenticate_admin!
+
   def index
     # ジャンル一覧を表示するインスタンス
     @genres = Genre.all

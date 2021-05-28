@@ -1,14 +1,13 @@
 class Public::WritersController < ApplicationController
+  before_action :authenticate_user!
+  # before_action :logged_in_user, only: [:edit]
+
   def index
     @users = User.all
   end
 
   def show
-    structures = Structure.where(user_id: current_user.id)
-    # byebug
-    @photos = Photo.where(structure_id: structures.ids)
-
-    # byebug
+    @structures = Structure.where(user_id: current_user.id)
   end
 
   def edit
@@ -29,6 +28,12 @@ class Public::WritersController < ApplicationController
     @user.update(is_deleted: "退会")
     reset_session
     redirect_to "/"
+  end
+
+  def logged_in_user
+    unless current_user.id == params[:id]
+      redirect_to writer_path(current_user)
+    end
   end
 
   private

@@ -1,4 +1,8 @@
 class Public::WritingsController < ApplicationController
+  # ユーザー以外のアクセス制限
+  before_action :authenticate_user!, except: [:show]
+  before_action :logged_in_user, only: [:edit]
+
   def new
     @structure = Structure.new
     # @writing.designers.buil
@@ -53,8 +57,19 @@ class Public::WritingsController < ApplicationController
   end
 
   def destroy
+    structure = Structure.find(params[:id])
+    structure.destroy
+    redirect_to writer_path(current_user)
   end
 
+
+  # editページにアクセスするユーザーがcurrent_userかどうかを判定
+  def logged_in_user
+    @structure = Structure.find(params[:id])
+    unless @structure.user_id == current_user.id
+      redirect_to writing_path(@structure)
+    end
+  end
 
   private
 

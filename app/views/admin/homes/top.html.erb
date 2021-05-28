@@ -1,17 +1,21 @@
-<h1>執筆履歴一覧</h1>
-<table class="table table-striped">
-  <tr>
-    <th>執筆日時</th>
-    <th>ニックネーム</th>
-    <th>ジャンル</th>
-    <th>建築・土木構造物名</th>
-    <th>設計者名</th>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-</table>
+<div class="container">
+  <h4 class="mt-3">執筆履歴一覧</h1>
+  <table class="table table-striped">
+    <tr>
+      <th>執筆日時</th>
+      <th>ニックネーム</th>
+      <th>ジャンル</th>
+      <th>建築・土木構造物名</th>
+      <th>設計者名</th>
+    </tr>
+    <% @structures.each do |structure| %>
+    <tr>
+      <td><%= structure.created_at %></td>
+      <td><%= User.find(structure.user_id).name %></td>
+      <td><%= Genre.find(structure.genre_id).name %></td>
+      <td><%= structure.name %></td>
+      <td><%= structure.last_name + structure.first_name %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>

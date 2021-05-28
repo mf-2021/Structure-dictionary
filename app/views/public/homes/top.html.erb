@@ -9,6 +9,7 @@
         <% end %>
       </section>
       <h6><%= structure.name %></h6>
+      <h6>執筆者：<%= @users.find(structure.user_id).name %></h6>
     </div>
     <% end %>
   </div>
