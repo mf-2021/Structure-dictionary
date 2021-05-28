@@ -8,7 +8,7 @@ class Public::WritingsController < ApplicationController
     # @writing.designers.buil
     # @writing.photos.build
     # @writing.introductions.build
-    # @tags = Tag.new
+    @tags = Tag.new
     @genres = Genre.all
   end
 
@@ -18,10 +18,10 @@ class Public::WritingsController < ApplicationController
     @structure.genre_id = params[:genre][:name].to_i
     @structure.structure_users.new(user_id: current_user.id)
     @structure.save
-    # @tag = Tag.new(name: params[:structure][:tags][:name])
-    # @tag.save
-    # @structure_tag =StructureTag.new(tag_id: @tag.id, structure_id: @structure.id)
-    # @structure_tag.save
+    @tag = Tag.new(name: params[:structure][:tags][:name])
+    @tag.save
+    @structure_tag =StructureTag.new(tag_id: @tag.id, structure_id: @structure.id)
+    @structure_tag.save
     redirect_to "/"
   end
 
@@ -32,19 +32,17 @@ class Public::WritingsController < ApplicationController
 
   def show
     @structure = Structure.find(params[:id])
-    # byebug
     # @add_writing = Structure.new
-    # structure_tag = StructureTag.find_by(structure_id: @structure.id)
-    # @tags = Tag.where(id: structure_tag.tag_id)
+    structure_tag = StructureTag.find_by(structure_id: @structure.id)
+    @tags = Tag.where(id: structure_tag.tag_id)
     # geo = @writing.structure_address
     # @geo = Geocoder.coordinates(geo)
-    # byebug
   end
 
   def edit
     @structure = Structure.find(params[:id])
-    # structure_tag = StructureTag.find_by(structure_id: @writing.id)
-    # @tags = Tag.find_by(id: structure_tag.tag_id)
+    structure_tag = StructureTag.find_by(structure_id: @structure.id)
+    @tags = Tag.find_by(id: structure_tag.tag_id)
     @genres = Genre.all
     # @add_writing = Structure.new
   end
@@ -52,7 +50,7 @@ class Public::WritingsController < ApplicationController
   def update
     @structure = Structure.find(params[:id])
     @structure.update(structure_params)
-    # @tag = Tag.update(name: params[:structure][:tags][:name])
+    @tag = Tag.update(name: params[:structure][:tags][:name])
     redirect_to writing_path(params[:id])
   end
 

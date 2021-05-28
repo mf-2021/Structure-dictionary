@@ -1,5 +1,5 @@
 class Admin::HomesController < ApplicationController
-# 管理者側homesコントローラー
+  before_action :authenticate_admin!
 
   def top
     @structures = Structure.all
