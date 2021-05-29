@@ -8,6 +8,7 @@ class Public::WritersController < ApplicationController
 
   def show
     @structures = Structure.where(user_id: current_user.id)
+    @user = User.find(current_user.id)
   end
 
   def edit
