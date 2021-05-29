@@ -13,8 +13,10 @@
       <p>所在地：<%= @structure.prefecture + @structure.city + @structure.address %></p>
       <p>執筆者：<%= @structure.structure_users.find_by(user_id: @structure.user_id, structure_id: @structure.id).user.name %></p>
       <p>
-        <% if @structure.user_id == current_user.id %>
-          <%= link_to "編集", edit_writing_path(@structure) %> | <%= link_to "削除", writing_path(@structure), method: :delete, "data-confirm"=>"本当に削除してもよろしいですか？" %>
+        <% if current_user != nil %>
+          <% if @structure.user_id == current_user.id %>
+            <%= link_to "編集", edit_writing_path(@structure) %> | <%= link_to "削除", writing_path(@structure), method: :delete, "data-confirm"=>"本当に削除してもよろしいですか？" %>
+          <% end %>
         <% end %>
       </p>
     </div>
