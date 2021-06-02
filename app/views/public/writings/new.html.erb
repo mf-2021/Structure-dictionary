@@ -113,21 +113,6 @@
           <%= f.text_field :introduction, class:"form-control", placeholder:"例：東京オリンピック・パラリンピックの主会場です。" %>
         </div>
       </div>
-
-      <!--タグ入力欄-->
-      <%= f.fields_for :tags, @tags do |t| %>
-      <div class="row mt-3">
-        <div class="col">
-          <%= t.label :タグを付ける %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <%= t.text_field :name, class:"form-control", placeholder:"例：スポーツ" %>
-        </div>
-      <% end %>
-      </div>
-
       <div class="row my-5">
         <div class="col">
         <%= f.submit '執筆完了', class:"btn btn-dark" %>

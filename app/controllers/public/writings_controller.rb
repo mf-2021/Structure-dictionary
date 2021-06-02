@@ -5,10 +5,7 @@ class Public::WritingsController < ApplicationController
 
   def new
     @structure = Structure.new
-    # @writing.designers.buil
-    # @writing.photos.build
-    # @writing.introductions.build
-    @tags = Tag.new
+    # @tags = Tag.new
     @genres = Genre.all
   end
 
@@ -18,10 +15,19 @@ class Public::WritingsController < ApplicationController
     @structure.genre_id = params[:genre][:name].to_i
     @structure.structure_users.new(user_id: current_user.id)
     @structure.save
-    @tag = Tag.new(name: params[:structure][:tags][:name])
-    @tag.save
-    @structure_tag =StructureTag.new(tag_id: @tag.id, structure_id: @structure.id)
-    @structure_tag.save
+    # Google Cloud Vision API
+    auto_tags = Vision.get_image_data(@structure.image)
+    auto_tags.each do |auto_tag|
+      tag = Tag.find_or_create_by(name: auto_tag)
+      StructureTag.create(structure_id: @structure.id, tag_id: tag.id)
+    end
+
+
+    # @tag = Tag.new(name: params[:structure][:tags][:name])
+    # @tag.save
+    # @structure_tag =StructureTag.new(tag_id: @tag.id, structure_id: @structure.id)
+    # @structure_tag.save
+
     redirect_to "/"
   end
 
@@ -32,11 +38,8 @@ class Public::WritingsController < ApplicationController
 
   def show
     @structure = Structure.find(params[:id])
-    # @add_writing = Structure.new
-    structure_tag = StructureTag.find_by(structure_id: @structure.id)
-    @tags = Tag.where(id: structure_tag.tag_id)
-    # geo = @writing.structure_address
-    # @geo = Geocoder.coordinates(geo)
+    # structure_tag = StructureTag.find_by(structure_id: @structure.id)
+    # @tags = Tag.where(id: structure_tag.tag_id)
   end
 
   def edit
@@ -45,12 +48,19 @@ class Public::WritingsController < ApplicationController
     @tags = Tag.find_by(id: structure_tag.tag_id)
     @genres = Genre.all
     # @add_writing = Structure.new
+
   end
 
   def update
     @structure = Structure.find(params[:id])
     @structure.update(structure_params)
-    @tag = Tag.update(name: params[:structure][:tags][:name])
+    # @tag = Tag.update(name: params[:structure][:tags][:name])
+    # Google Cloud Vision API
+    auto_tags = Vision.get_image_data(@structure.image)
+    auto_tags.each do |auto_tag|
+      tag = Tag.find_or_create_by(name: auto_tag)
+      StructureTag.create(structure_id: @structure.id, tag_id: tag.id)
+    end
     redirect_to writing_path(params[:id])
   end
 
