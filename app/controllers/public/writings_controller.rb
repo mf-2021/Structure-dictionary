@@ -48,7 +48,6 @@ class Public::WritingsController < ApplicationController
   def update
     @structure = Structure.find(params[:id])
     @structure.update(structure_params)
-
     # Google Cloud Vision API
     if @structure.saved_change_to_image_id?
       @structure.tags.destroy_all
