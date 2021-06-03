@@ -12,7 +12,7 @@
         <span class="mt-2">#<%= structure_tag.tag.name %>&ensp;</span>
       <!--</p>-->
       <% end %>
-      <p mt-5>郵便番号：<%= @structure.postal_code %></p>
+      <p class="mt-5">郵便番号：<%= @structure.postal_code %></p>
       <p>所在地：<%= @structure.prefecture + @structure.city + @structure.address %></p>
       <p>執筆者：<%= @structure.structure_users.find_by(user_id: @structure.user_id, structure_id: @structure.id).user.name %></p>
       <p>
