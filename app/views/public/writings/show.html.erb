@@ -6,9 +6,10 @@
       <p class="btn btn-secondary mt-2"><%= Genre.find(@structure.genre_id).name %></p>
       <h5 class="mt-2">設計者：<%= @structure.last_name + @structure.first_name %></h2>
       <P class="mt-5"><%= @structure.introduction %></P>
+      タグ：
       <% StructureTag.where(structure_id: @structure.id).each do |structure_tag| %>
       <!--<p class="mt-2">-->
-        <span class="mt-2">#<%= structure_tag.tag.name %>,</span>
+        <span class="mt-2">#<%= structure_tag.tag.name %>&ensp;</span>
       <!--</p>-->
       <% end %>
       <p mt-5>郵便番号：<%= @structure.postal_code %></p>
