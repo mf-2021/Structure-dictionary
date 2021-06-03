@@ -38,28 +38,25 @@ class Public::WritingsController < ApplicationController
 
   def show
     @structure = Structure.find(params[:id])
-    # structure_tag = StructureTag.find_by(structure_id: @structure.id)
-    # @tags = Tag.where(id: structure_tag.tag_id)
   end
 
   def edit
     @structure = Structure.find(params[:id])
-    structure_tag = StructureTag.find_by(structure_id: @structure.id)
-    @tags = Tag.find_by(id: structure_tag.tag_id)
     @genres = Genre.all
-    # @add_writing = Structure.new
-
   end
 
   def update
     @structure = Structure.find(params[:id])
     @structure.update(structure_params)
-    # @tag = Tag.update(name: params[:structure][:tags][:name])
+
     # Google Cloud Vision API
-    auto_tags = Vision.get_image_data(@structure.image)
-    auto_tags.each do |auto_tag|
-      tag = Tag.find_or_create_by(name: auto_tag)
-      StructureTag.create(structure_id: @structure.id, tag_id: tag.id)
+    if @structure.saved_change_to_image_id?
+      @structure.tags.destroy_all
+      auto_tags = Vision.get_image_data(@structure.image)
+      auto_tags.each do |auto_tag|
+        tag = Tag.find_or_create_by(name: auto_tag)
+        StructureTag.create(structure_id: @structure.id, tag_id: tag.id)
+      end
     end
     redirect_to writing_path(params[:id])
   end
@@ -86,7 +83,7 @@ class Public::WritingsController < ApplicationController
     params.require(:structure).permit(:name, :postal_code, :prefecture, :city, :address, :last_name, :first_name, :image, :introduction)
   end
 
-  def tag_params
-    params.require(:tag).permit(:name)
-  end
+  # def tag_params
+  #   params.require(:tag).permit(:name)
+  # end
 end
